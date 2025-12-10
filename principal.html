@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard | ProControl ERP</title>
+    <link rel="stylesheet" href="css/style.css"> 
+</head>
+<body>
+    
+    <div id="sidebar-placeholder"></div>
+
+    <main class="main-content">
+        <div id="header-placeholder"></div>
+        
+        <section class="metricas" id="secao-metricas">
+            <a href="#" class="card card-total" data-filter="all">
+                <span class="card-icon">📦</span> <p>Total de Itens</p> <h3>0</h3>
+            </a>
+            <a href="#" class="card card-concluido" data-filter="concluido">
+                <span class="card-icon">✅</span> <p>Itens Concluídos</p> <h3>0</h3>
+            </a>
+            <a href="#" class="card card-andamento" data-filter="andamento">
+                <span class="card-icon">⏳</span> <p>Em Andamento</p> <h3>0</h3>
+            </a>
+            <a href="#" class="card card-atrasado" data-filter="alerta">
+                <span class="card-icon">⚠️</span> <p>Próximo ao Prazo</p> <h3>0</h3>
+            </a>
+        </section>
+
+        <section class="tabela-section" id="secao-dashboard">
+            <table class="tabela-producao">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Item de Produção</th>
+                        <th>Progresso</th>
+                        <th>Etapas (Unidades)</th>
+                        <th>Prazo Final</th>
+                        <th>Status</th>
+                        <th>Ação Progresso</th> 
+                        <th>Ação Editar</th>
+                        <th>Ação Remover</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    </tbody>
+            </table>
+        </section>
+        </main>
+
+    <script src="js/storage.js"></script>    <script src="js/auth.js"></script>      <script src="js/dashboard.js"></script> <script src="js/loader.js"></script>    </body>
+</html>

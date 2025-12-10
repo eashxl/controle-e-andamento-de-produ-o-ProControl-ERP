@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Carregando | ProControl ERP</title>
+</head>
+<body>
+    <h1>Carregando...</h1>
+    <script>
+        // MUDANÇA: Lendo do sessionStorage
+        if (sessionStorage.getItem('usuario_logado') === 'true') {
+            window.location.href = 'principal.html';
+        } else {
+            window.location.href = 'login.html';
+        }
+    </script>
+</body>
+</html>

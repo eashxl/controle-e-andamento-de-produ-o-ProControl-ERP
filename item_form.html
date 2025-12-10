@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestão de Item | ProControl ERP</title>
+    <link rel="stylesheet" href="css/style.css"> 
+</head>
+<body>
+    
+    <div id="sidebar-placeholder"></div>
+
+    <main class="main-content">
+        <div id="header-placeholder"></div>
+        
+        <section class="tabela-section" id="secao-novo-item">
+            <h2 id="form-item-titulo">Adicionar Novo Item</h2>
+            
+            <div class="form-add-container">
+                <input type="hidden" id="edit-item-id">
+                
+                <h3>Detalhes do Item</h3>
+                <input type="text" id="nome-item" placeholder="Nome do Item..." class="input-erp" required>
+                <input type="number" id="qtd-total" placeholder="Total Qtd." class="input-erp" min="1" required>
+                <input type="date" id="data-prazo" class="input-erp" required>
+                
+                <button class="btn btn-primary" id="btn-salvar-novo-item" disabled>Salvar Item</button>
+            </div>
+            <p id="mensagem-erro-form" class="mensagem-erro-form"></p>
+        </section>
+        </main>
+
+    <script src="js/storage.js"></script>   <script src="js/auth.js"></script>     <script src="js/form_item.js"></script> <script src="js/loader.js"></script>   </body>
+</html>

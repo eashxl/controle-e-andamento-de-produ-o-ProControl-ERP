@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login | ProControl ERP</title>
+    <link rel="stylesheet" href="css/style.css"> 
+</head>
+<body class="login-body">
+    <div class="login-container">
+        <h1>ProControl ERP</h1>
+        <h2>Acesso ao Painel de Produção</h2>
+        
+        <form id="login-form">
+            <div class="input-group">
+                <label for="username">Usuário:</label>
+                <input type="text" id="username" placeholder="Digite seu usuário" required>
+            </div>
+            <div class="input-group">
+                <label for="password">Senha:</label>
+                <input type="password" id="password" placeholder="Digite sua senha" required>
+            </div>
+            <button type="submit" class="btn btn-primary btn-login">Entrar</button>
+            <p id="mensagem-erro" class="mensagem-erro"></p>
+        </form>
+    </div>
+    <script src="js/login.js"></script>
+</body>
+</html>

@@ -1,0 +1,484 @@
+/* ----------------------------------------------------------
+   1. VARIÁVEIS GLOBAIS (:root)
+   Aqui definimos as cores e configurações que serão usadas em todo o site.
+   A vantagem é: se quiseres mudar o azul do site, mudas apenas aqui
+   e ele atualiza em todos os lugares.
+   ----------------------------------------------------------
+*/
+:root {
+    /* Paleta de Cores Principal */
+    --cor-primaria: #4c4e97;       /* Cor principal (botões, títulos fortes) */
+    --cor-secundaria: #343a40;     /* Textos escuros */
+    --cor-sidebar: #2c3e50;        /* Fundo da barra lateral */
+    --cor-fundo: #f0f4f8;          /* Fundo cinza claro da página */
+    --cor-borda: #e1e8ed;          /* Linhas divisórias */
+    
+    /* Cores de Estado (Semânticas) */
+    --status-success: #2ecc71;     /* Verde para sucesso/concluído */
+    --status-warning: #f1c40f;     /* Amarelo para atenção/editar */
+    --status-info: #3498db;        /* Azul para informações/andamento */
+    --status-danger: #e74c3c;      /* Vermelho para erro/atrasado */
+    
+    /* Sombras (para dar profundidade 3D) */
+    --sombra-suave: 0 5px 15px rgba(0, 0, 0, 0.08);
+    --sombra-card-lift: 0 10px 20px rgba(0, 0, 0, 0.1); /* Sombra mais forte ao passar o mouse */
+}
+
+/* ----------------------------------------------------------
+   2. RESET BÁSICO
+   Removemos as margens padrão do navegador e configuramos o modelo de caixa.
+   ----------------------------------------------------------
+*/
+* {
+    /* Garante que o padding e a borda estejam incluídos na largura total do elemento.
+       Isso evita que elementos fiquem maiores do que o esperado. */
+    box-sizing: border-box; 
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Poppins', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* Fontes modernas */
+    background-color: var(--cor-fundo); /* Usa a variável definida lá em cima */
+    display: flex;       /* Transforma o corpo num container Flex (Sidebar ao lado do Conteúdo) */
+    min-height: 100vh;   /* Garante que a página ocupe 100% da altura da janela visível */
+    font-weight: 400;    /* Espessura normal da fonte */
+}
+
+/* ----------------------------------------------------------
+   3. SIDEBAR (BARRA LATERAL)
+   Estrutura fixa à esquerda.
+   ----------------------------------------------------------
+*/
+/* Container auxiliar para garantir que a sidebar não encolha */
+#sidebar-placeholder {
+    display: flex;
+    flex-shrink: 0; /* Impede que o flexbox "esmague" a sidebar se a tela for pequena */
+}
+
+.sidebar {
+    width: 280px;  /* Largura fixa */
+    background-color: var(--cor-sidebar);
+    color: white;
+    padding: 20px 0; /* Espaçamento vertical interno */
+    box-shadow: 4px 0 10px rgba(0, 0, 0, 0.2); /* Sombra à direita da barra */
+    flex-grow: 1; /* Faz a sidebar esticar verticalmente */
+}
+
+.logo {
+    font-size: 1.8em; /* Aumenta o texto */
+    font-weight: 700; /* Texto negrito */
+    text-align: center;
+    padding: 15px 0 40px 0;
+    letter-spacing: 1px; /* Espaço entre as letras */
+    color: #ecf0f1; 
+}
+
+/* Estilo dos links do menu */
+.menu-item {
+    display: block; /* Ocupa a linha toda, permitindo clicar na área inteira */
+    padding: 18px 30px; 
+    color: #bdc3c7; 
+    text-decoration: none; /* Remove o sublinhado padrão de links */
+    font-size: 1em;
+    border-left: 6px solid transparent; /* Cria uma borda invisível para a animação de "ativo" */
+    transition: all 0.3s ease-in-out; /* Suaviza a mudança de cor ao passar o mouse */
+}
+
+/* Efeito ao passar o mouse (Hover) */
+.menu-item:hover {
+    background-color: #34495e;
+    color: white;
+}
+
+/* Estilo para o item do menu que está selecionado atualmente */
+.menu-item.active {
+    background-color: #34495e;
+    color: white;
+    border-left-color: var(--status-success); /* A borda invisível agora fica verde */
+    font-weight: 600;
+}
+
+/* ----------------------------------------------------------
+   4. ÁREA PRINCIPAL (MAIN CONTENT)
+   Onde fica o dashboard, tabelas e formulários.
+   ----------------------------------------------------------
+*/
+.main-content {
+    flex-grow: 1; /* Ocupa todo o espaço restante à direita da sidebar */
+    padding: 40px; /* Espaço interno para o conteúdo não colar nas bordas */
+}
+
+.header {
+    display: flex; /* Alinha o título e o user-info na mesma linha */
+    justify-content: space-between; /* Um na esquerda, outro na direita */
+    align-items: center; /* Centraliza verticalmente */
+    padding-bottom: 25px;
+    border-bottom: 2px solid var(--cor-borda); 
+    margin-bottom: 30px;
+}
+
+.header h1 {
+    color: var(--cor-secundaria);
+    font-size: 2.2em;
+    font-weight: 700;
+}
+
+/* Botão/Área do utilizador no canto superior direito */
+.user-info {
+    font-size: 0.9em;
+    color: var(--cor-secundaria);
+    cursor: pointer; /* O mouse vira uma "mãozinha" */
+    padding: 8px 15px;
+    border: 1px solid var(--cor-borda);
+    border-radius: 20px; /* Bordas bem arredondadas (estilo pílula) */
+    transition: background-color 0.2s, box-shadow 0.2s; /* Animação suave */
+}
+
+.user-info:hover {
+    background-color: white;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+/* ----------------------------------------------------------
+   5. CARDS DE MÉTRICAS (DASHBOARD)
+   Os quadrados coloridos com números.
+   ----------------------------------------------------------
+*/
+.metricas {
+    display: flex; /* Coloca os cards um ao lado do outro */
+    gap: 30px;     /* Espaço entre os cards */
+    margin-bottom: 40px;
+}
+
+.metricas a.card {
+    text-decoration: none; 
+    color: initial; /* Reseta a cor do link */
+    cursor: pointer;
+    border: none; 
+    background-color: white;
+    padding: 30px; 
+    border-radius: 16px; 
+    box-shadow: var(--sombra-suave); 
+    flex: 1; /* Faz todos os cards terem a mesma largura */
+    transition: all 0.3s ease-in-out; /* Animação de movimento e sombra */
+}
+
+/* Efeito de "levantar" o card ao passar o mouse */
+.metricas a.card:hover {
+    transform: translateY(-5px); /* Move o card 5px para cima */
+    box-shadow: var(--sombra-card-lift);
+    border-color: transparent;
+}
+
+/* Estado de filtro ativo (borda colorida) */
+.metricas a.card.active-filter {
+    box-shadow: 0 0 0 4px var(--cor-primaria), var(--sombra-card-lift); 
+    border-color: var(--cor-primaria);
+    transform: translateY(-2px); 
+}
+
+.card h3 {
+    font-size: 3em; 
+    margin-top: 5px;
+    font-weight: 700;
+    opacity: 0.9;
+}
+
+.card p {
+    color: var(--cor-secundaria);
+    font-size: 1.1em;
+    font-weight: 500;
+}
+
+.card-icon {
+    font-size: 2.5em;
+    float: right; /* Joga o ícone para a direita */
+    opacity: 0.2; /* Deixa o ícone transparente/sutil */
+    color: var(--cor-secundaria);
+}
+
+/* Cores específicas para os números dentro dos cards */
+.card-total h3 { color: var(--cor-primaria); }
+.card-concluido h3 { color: var(--status-success); }
+.card-andamento h3 { color: var(--status-info); }
+.card-atrasado h3 { color: var(--status-danger); }
+
+/* ----------------------------------------------------------
+   6. TABELAS E LISTAS
+   Estilização da área onde os dados são apresentados.
+   ----------------------------------------------------------
+*/
+.tabela-section {
+    background-color: white;
+    padding: 30px;
+    border-radius: 16px; 
+    box-shadow: var(--sombra-suave); 
+    margin-top: 20px; 
+}
+
+.tabela-section h2 {
+    font-size: 1.8em;
+    color: var(--cor-secundaria);
+    margin-bottom: 25px;
+    font-weight: 600;
+}
+
+/* ----------------------------------------------------------
+   7. FORMULÁRIOS (INPUTS E BOTÕES)
+   ----------------------------------------------------------
+*/
+.form-add-container {
+    padding: 25px;
+    background-color: var(--cor-fundo); 
+    border-radius: 12px;
+    margin-bottom: 30px;
+    border: 1px solid var(--cor-borda);
+    box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.05); /* Sombra interna para dar profundidade */
+    display: flex;
+    flex-wrap: wrap; /* Permite que os itens quebrem linha se faltar espaço */
+    align-items: center;
+    gap: 20px; 
+}
+
+.form-add-container h3 {
+    width: 100%; /* O título ocupa a linha inteira sozinho */
+    margin-bottom: 10px;
+    color: var(--cor-primaria);
+    font-weight: 600;
+}
+
+.input-erp {
+    padding: 12px 18px; 
+    border: 2px solid var(--cor-borda);
+    border-radius: 8px;
+    width: 250px; 
+    transition: border-color 0.3s;
+}
+
+/* Efeito ao clicar no campo para digitar */
+.input-erp:focus {
+    border-color: var(--cor-primaria); /* Borda fica azul/roxa */
+    outline: none; /* Remove a linha azul padrão do navegador */
+    box-shadow: 0 0 0 3px rgba(76, 78, 151, 0.2); /* Adiciona um brilho suave */
+}
+
+/* Estilos gerais de Botões */
+.btn {
+    padding: 12px 25px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: background-color 0.2s, transform 0.1s;
+}
+
+/* Efeito de "clique" (o botão diminui levemente) */
+.btn:active {
+    transform: scale(0.98);
+}
+
+.btn-primary {
+    background-color: var(--cor-primaria);
+    color: white;
+}
+
+.btn-primary:hover {
+    background-color: #3b3d81; /* Escurece a cor no hover */
+}
+
+/* --- Estilos específicos da Tabela --- */
+.tabela-producao {
+    width: 100%;
+    border-collapse: collapse; /* Remove espaços duplos entre as bordas das células */
+}
+
+/* Estiliza Cabeçalho (TH) e Células (TD) */
+.tabela-producao th, .tabela-producao td {
+    padding: 18px 15px; 
+    text-align: left;
+    border-bottom: 1px solid var(--cor-borda);
+    font-size: 0.95em;
+}
+
+.tabela-producao th {
+    background-color: #f8f8f8; 
+    color: var(--cor-secundaria);
+    font-weight: 700;
+    border-top: 4px solid var(--cor-primaria); /* Linha colorida no topo da tabela */
+}
+
+/* Efeito zebra ou hover: destaca a linha onde o mouse está */
+.tabela-producao tr:hover {
+    background-color: #fafafa;
+}
+
+/* Cores de fundo suaves para linhas baseadas no status */
+.status-concluido { background-color: rgba(46, 204, 113, 0.05); } 
+.status-alerta { background-color: rgba(241, 196, 15, 0.05); } 
+.status-danger { background-color: rgba(231, 76, 60, 0.05); }
+
+/* ----------------------------------------------------------
+   8. COMPONENTES VISUAIS (BARRA DE PROGRESSO E TAGS)
+   ----------------------------------------------------------
+*/
+.progresso-bar {
+    background-color: var(--cor-borda); /* Fundo cinza da barra (o "total") */
+    border-radius: 12px;
+    height: 18px; 
+    width: 100%;
+    overflow: hidden; /* Garante que o preenchimento não saia para fora das bordas arredondadas */
+}
+
+.progresso-fill {
+    height: 100%;
+    text-align: center;
+    color: white;
+    line-height: 18px; /* Centraliza o texto verticalmente */
+    font-size: 0.8em;
+    font-weight: 600;
+}
+
+/* Variações de cor da barra de progresso */
+.progresso-fill.concluido { background-color: var(--status-success); }
+.progresso-fill.alerta { background-color: var(--status-warning); color: #333; }
+.progresso-fill.andamento { background-color: var(--status-info); }
+.progresso-fill.atrasado { background-color: var(--status-danger); } 
+
+/* Tags (etiquetas pequenas coloridas) */
+.tag {
+    padding: 8px 12px; 
+    border-radius: 20px; 
+    font-weight: 700;
+    font-size: 0.85em;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.tag-success { background-color: var(--status-success); color: white; }
+.tag-warning { background-color: var(--status-warning); color: #333; }
+.tag-info { background-color: var(--status-info); color: white; }
+.tag-danger { background-color: var(--status-danger); color: white; } 
+
+/* Botões de ação (Ver, Editar, Excluir) */
+.btn-view {
+    background-color: var(--cor-primaria);
+    color: white;
+    padding: 10px 18px;
+    font-size: 0.95em;
+}
+
+.btn-danger {
+    background-color: var(--status-danger); 
+    color: white;
+    padding: 10px 18px;
+    font-size: 0.95em;
+}
+
+.btn-danger:hover {
+    background-color: #c0392b;
+}
+
+.btn-edit {
+    background-color: var(--status-warning); 
+    color: #333; 
+    padding: 10px 18px;
+    font-size: 0.95em;
+}
+
+.btn-edit:hover {
+    background-color: #d8ad0d;
+}
+
+/* ----------------------------------------------------------
+   9. TELA DE LOGIN
+   Esta seção tem um estilo isolado.
+   ----------------------------------------------------------
+*/
+
+.login-body {
+    display: flex;
+    justify-content: center; /* Centraliza horizontalmente */
+    align-items: center;     /* Centraliza verticalmente */
+    min-height: 100vh;
+    background-color: var(--cor-fundo); 
+    padding: 0;
+    margin: 0;
+}
+
+.login-container {
+    background-color: white;
+    padding: 50px; 
+    border-radius: 20px; 
+    box-shadow: var(--sombra-card-lift); 
+    width: 400px; /* Largura fixa para o cartão de login */
+    text-align: center;
+}
+
+.login-container h1 {
+    color: var(--cor-primaria);
+    font-size: 2.5em;
+    margin-bottom: 5px;
+    font-weight: 800;
+    border-bottom: none;
+}
+
+.login-container h2 {
+    color: var(--cor-secundaria);
+    font-size: 1.2em;
+    margin-bottom: 40px;
+}
+
+.input-group {
+    margin-bottom: 25px;
+    text-align: left; /* Rótulos alinhados à esquerda dentro do container centralizado */
+}
+
+.input-group label {
+    display: block; /* Força o label a ficar em cima do input, não ao lado */
+    margin-bottom: 8px; 
+    font-weight: 600;
+    color: var(--cor-secundaria);
+}
+
+.login-container input {
+    width: 100%;
+    padding: 15px; 
+    border: 2px solid var(--cor-borda);
+    border-radius: 10px;
+    box-sizing: border-box;
+    font-size: 1em;
+}
+
+.btn-login {
+    width: 100%; /* Botão ocupa toda a largura disponível */
+    padding: 18px;
+    font-size: 1.2em;
+    font-weight: 700;
+    background-color: var(--cor-primaria);
+    color: white;
+    margin-top: 15px;
+}
+
+.btn-login:hover {
+    background-color: #3b3d81;
+}
+
+.mensagem-erro {
+    color: var(--status-danger);
+    font-weight: bold;
+    margin-top: 15px;
+}
+
+.mensagem-erro-form {
+    color: var(--status-danger);
+    font-weight: 600;
+    margin-top: -10px;
+    margin-left: 25px;
+    text-align: left;
+}
+
+/* Regra especial para esconder a Sidebar quando estamos na tela de Login */
+.login-body .sidebar, 
+.login-body .main-content {
+    display: none !important; /* O !important força essa regra a sobrepor qualquer outra */
+}
